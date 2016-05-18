@@ -12,7 +12,8 @@ module Delcom
 
     FLASH_N = 10
     FLASH_DURATION = 0.3
-
+    INTERFACE_ID = 0
+    
     COLORS = {
       :off       => "\x00",
       :green     => "\x01",
@@ -49,17 +50,16 @@ module Delcom
       }
     end
 
-    private
-
-    VENDOR_ID = 0x0fc5
-    PRODUCT_ID = 0xb080
-    INTERFACE_ID = 0
-
     def close
       handle.release_interface(INTERFACE_ID)
       handle.usb_close
       @handle = nil
     end
+
+private
+
+    VENDOR_ID = 0x0fc5
+    PRODUCT_ID = 0xb080
 
     def msg(data)
       if data == "\x00"
